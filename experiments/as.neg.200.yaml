@@ -25,8 +25,8 @@ dev_proportion: 0.1
 num_epochs: 100
 steps_accum_gradients: 1
 learning_rate: 0.005
-negative_mult_training: 100
-negative_mult_test: 100
+negative_mult_training: 200
+negative_mult_test: 200
 smart_neg_sampling: True
 seed: 1234
 target_measure: MAP # measure to define the best epoch F1, Precision, Recall, MRR, MAP
