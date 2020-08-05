@@ -128,6 +128,7 @@ def load_data_from_tar(file, tar_archive, replace_unknow=False, starting_line=1,
 def create_parser():
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument('--config_file',default='experiments/parameters_example.yaml', type=argparse.FileType(mode='r'), help='optional, yaml file containing parameters to be used, overrides command line parameters')
+    parser.add_argument('--negative_mult_training', default=100, type=int)
     return parser
 
 def parse_args(parser):
@@ -138,7 +139,8 @@ def parse_args(parser):
         # print(data)
         arg_dict = args.__dict__
         for key, value in data.items():
-            arg_dict[key] = value
+            if key not in arg_dict:
+                arg_dict[key] = value
 
     # args.learning_rate =random_param_value(args.learning_rate, args.learning_rate_min, args.learning_rate_max, type='logscale')
     # args.num_hist_steps = random_param_value(args.num_hist_steps, args.num_hist_steps_min, args.num_hist_steps_max, type='int')
@@ -154,7 +156,7 @@ def parse_args(parser):
     # else:
     #     args.gcn_parameters['lstm_l2_feats'] =random_param_value(args.gcn_parameters['lstm_l2_feats'], args.gcn_parameters['lstm_l1_feats_min'], args.gcn_parameters['lstm_l1_feats_max'], type='int')
     # args.gcn_parameters['cls_feats'] =random_param_value(args.gcn_parameters['cls_feats'], args.gcn_parameters['cls_feats_min'], args.gcn_parameters['cls_feats_max'], type='int')
-
+    print(args)
     return args
 
 def DS_normalize(edge_feature):
